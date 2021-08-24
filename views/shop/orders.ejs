@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../includes/head.ejs') %>
+
+  <body>
+    <%- include('../includes/navigation.ejs') %>
+    <main>
+      <% if(orders.length<=0 || !orders){ %>
+        <h1>You do not have any order</h1>
+        <% }else{ %>
+          <ul class="orders" >
+          <% for( order of orders){ %> 
+              <li class="orders__item" >Order Id - <%= order._id %> </li>
+              <ul class="orders__products" >
+                <% order.products.forEach(product=>{ %>
+                  <li class="orders__products-item" ><%= product.productData.title %>(<%= product.quantity %>)   </li>
+                  <% }) %>  
+                  <li class="orders__products-item">
+                    <a href="/orders/<%= order._id %>">Invoice</a>
+                  </li>
+              </ul>
+            </ul>
+            <% } %> 
+          <% } %>   
+    </main>
+  </body>
+</html>
